@@ -64,3 +64,40 @@ const followersArray = []
   bigknell
 */
 
+function gitHubCards(user){
+  //creating elements
+  const card = document.createElement('div');
+  const personImage = document.createElement('img');
+  const personInfo = document.createElement('div');
+  const personName = document.createElement('h3');
+  const personUserName = document.createElement('p');
+  const personLocation = document.createElement('p');
+  const personProfile = document.createElement('p');
+  const personProfileLink = document.createElement('a');
+  const personFollowers = document.createElement('p');
+  const personFollowing = document.createElement('p');
+  const personBio = document.crearteElement('p');
+
+  //Set classes
+  card.classList.add('card');
+  personInfo.classList.add('card-info');
+  personName.classList.add('name');
+  personUserName.classList.add('username');
+
+  //Content
+  personImage.src = user.avatar_url;
+  personName.textContent = user.name;
+  personUserName.textContent = user.login;
+  personLocation.textContent = user.location;
+  personProfile.textContent = "Profile";
+  personProfileLink.textContent = user.html_url
+  personProfileLink.href = user.html_url;
+  personFollowers.textContent = `Followers: ${user.followers}`;
+  personFollowing.textContent = `Following: ${user.following}`;
+  personBio.textContent = user.bio;
+
+  //structure of elements
+  personProfile.appendChild(personProfileLink);
+  personInfo.appendChild(personName);
+  personInfo
+}
