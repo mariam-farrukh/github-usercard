@@ -58,20 +58,20 @@ axios.get(`https:/api.github.com/users/mariam-farrukh/followers`)
 
 //end stretch problem
 
-// const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell']
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell']
 
-// followersArray.forEach(follower => {
-//   axios.get(`https://api.github.com/users/${follower}`)
-//   .then(data => {
-//     const user = data.data;
-//     const container = document.querySelector('.cards');
-//     container.appendChild(gitHubCards(user));
-//     console.log("Works", data.data);
-//   })
-//   .catch(error => {
-//     console.log("Oh no!", error)
-//   })
-// })
+followersArray.forEach(follower => {
+  axios.get(`https://api.github.com/users/${follower}`)
+  .then(data => {
+    const user = data.data;
+    const container = document.querySelector('.cards');
+    container.appendChild(gitHubCards(user));
+    console.log("Works", data.data);
+  })
+  .catch(error => {
+    console.log("Oh no!", error)
+  })
+})
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
