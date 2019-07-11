@@ -50,7 +50,7 @@ axios.get(`https:/api.github.com/users/mariam-farrukh/followers`)
       console.log("Oh no!", error)
     })
   })
-  console.log('it works!', data.data);
+  console.log('yay!', data.data);
 })
 .catch(error =>{
   console.log('Uh oh', error);
@@ -125,7 +125,7 @@ function gitHubCards(user){
   personImage.src = user.avatar_url;
   personName.textContent = user.name;
   personUserName.textContent = user.login;
-  personLocation.textContent = user.location;
+  personLocation.textContent = `Location: ${user.location}`;
   personProfile.textContent = "Profile: ";
   personProfileLink.textContent = user.html_url
   personProfileLink.href = user.html_url;
