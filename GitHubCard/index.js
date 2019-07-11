@@ -131,7 +131,7 @@ function gitHubCards(user){
   personProfileLink.href = user.html_url;
   personFollowers.textContent = `Followers: ${user.followers}`;
   personFollowing.textContent = `Following: ${user.following}`;
-  personBio.textContent = user.bio;
+  personBio.textContent = `Bio: ${user.bio}`;
 
   //structure of elements
   card.appendChild(personImage);
