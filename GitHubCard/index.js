@@ -76,7 +76,7 @@ function gitHubCards(user){
   const personProfileLink = document.createElement('a');
   const personFollowers = document.createElement('p');
   const personFollowing = document.createElement('p');
-  const personBio = document.crearteElement('p');
+  const personBio = document.createElement('p');
 
   //Set classes
   card.classList.add('card');
@@ -97,7 +97,16 @@ function gitHubCards(user){
   personBio.textContent = user.bio;
 
   //structure of elements
+  card.appendChild(personImage);
+  card.appendChild(personInfo);
   personProfile.appendChild(personProfileLink);
   personInfo.appendChild(personName);
-  personInfo
+  personInfo.appendChild(personUserName);
+  personInfo.appendChild(personLocation);
+  personInfo.appendChild(personProfile);
+  personInfo.appendChild(personFollowers);
+  personInfo.appendChild(personFollowing);
+  personInfo.appendChild(personBio);
+
+  return card;
 }
