@@ -1,7 +1,17 @@
 /* Step 1: using axios, send a GET request to the following URL 
            (replacing the palceholder with your Github name):
-           https://api.github.com/users/<your name>
+           
 */
+axios.get(`https://api.github.com/users/mariam-farrukh`)
+.then(data=>{
+  const user = data.data;
+  const container = document.querySelector('.cards')
+  container.appendChild(gitHubCards(user));
+  console.log('it works!', data.data);
+})
+.catch(error =>{
+  console.log('Uh oh', error);
+})
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -24,7 +34,44 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+//stretch problem
+/
+axios.get(`https:/api.github.com/users/mariam-farrukh/followers`)
+.then(data=>{
+  const followersList = data.data;
+  followersList.forEach(follower => {
+    axios.get(`https://api.github.com/users/${follower.login}`)
+    .then(data => {
+      const user = data.data;
+      const container = document.querySelector('.cards');
+      container.appendChild(gitHubCards(user));
+    })
+    .catch(error => {
+      console.log("Oh no!", error)
+    })
+  })
+  console.log('yay!', data.data);
+})
+.catch(error =>{
+  console.log('Uh oh', error);
+})
+
+//end stretch problem
+
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell']
+
+followersArray.forEach(follower => {
+  axios.get(`https://api.github.com/users/${follower}`)
+  .then(data => {
+    const user = data.data;
+    const container = document.querySelector('.cards');
+    container.appendChild(gitHubCards(user));
+    console.log("Works", data.data);
+  })
+  .catch(error => {
+    console.log("Oh no!", error)
+  })
+})
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -53,3 +100,50 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+function gitHubCards(user){
+  //creating elements
+  const card = document.createElement('div');
+  const personImage = document.createElement('img');
+  const personInfo = document.createElement('div');
+  const personName = document.createElement('h3');
+  const personUserName = document.createElement('p');
+  const personLocation = document.createElement('p');
+  const personProfile = document.createElement('p');
+  const personProfileLink = document.createElement('a');
+  const personFollowers = document.createElement('p');
+  const personFollowing = document.createElement('p');
+  const personBio = document.createElement('p');
+
+  //Set classes
+  card.classList.add('card');
+  personInfo.classList.add('card-info');
+  personName.classList.add('name');
+  personUserName.classList.add('username');
+
+  //Content
+  personImage.src = user.avatar_url;
+  personName.textContent = user.name;
+  personUserName.textContent = user.login;
+  personLocation.textContent = `Location: ${user.location}`;
+  personProfile.textContent = "Profile: ";
+  personProfileLink.textContent = user.html_url
+  personProfileLink.href = user.html_url;
+  personFollowers.textContent = `Followers: ${user.followers}`;
+  personFollowing.textContent = `Following: ${user.following}`;
+  personBio.textContent = `Bio: ${user.bio}`;
+
+  //structure of elements
+  card.appendChild(personImage);
+  card.appendChild(personInfo);
+  personProfile.appendChild(personProfileLink);
+  personInfo.appendChild(personName);
+  personInfo.appendChild(personUserName);
+  personInfo.appendChild(personLocation);
+  personInfo.appendChild(personProfile);
+  personInfo.appendChild(personFollowers);
+  personInfo.appendChild(personFollowing);
+  personInfo.appendChild(personBio);
+
+  return card;
+}
